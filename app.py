@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -69,7 +70,6 @@ students = [
     }
 ]
 
-
 @app.route('/students', methods=['GET'])
 def get_students():
     return jsonify(students)
@@ -113,4 +113,5 @@ def delete_student(student_id):
         return jsonify({"message": "Student not found"}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    serve(app, host='0.0.0.0', port=8080)
